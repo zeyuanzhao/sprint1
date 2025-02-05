@@ -40,7 +40,7 @@ async function main() {
   });
 
   const result = await chatSession.sendMessage("What is the word?");
-  console.log(result.response.text().trim());
+  // console.log(result.response.text().trim());
 
   for (let i = 0; i < 20; i++) {
     const question = prompt(`Question ${i + 1}: `);
@@ -52,6 +52,7 @@ async function main() {
     }
     console.log(resultText);
   }
+  console.log("The word was: " + result.response.text().trim());
 }
 
 main();
