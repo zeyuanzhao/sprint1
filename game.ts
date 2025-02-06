@@ -20,12 +20,12 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 const sysprompt = fs.readFileSync("prompt.txt", "utf8");
 
-const model = genAI.getGenerativeModel({
+export const model = genAI.getGenerativeModel({
   model: "gemini-2.0-flash-exp",
   systemInstruction: sysprompt,
 });
 
-const generationConfig = {
+export const generationConfig = {
   temperature: 1,
   topP: 0.95,
   topK: 40,
