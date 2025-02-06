@@ -5,7 +5,7 @@ export default function Home() {
   getWord();
 
   return (
-    <div className="h-screen flex flex-col justify-between pb-4">
+    <div className="h-screen flex flex-col">
       <div className="flex justify-center mt-4">
         <div className="flex flex-col items-center">
           <h1 className="text-4xl">2️⃣0️⃣🤓</h1>

@@ -6,25 +6,47 @@ import { useEffect, useRef, useState } from "react";
 import { onAsk } from "@/app/actions";
 
 export default function Game() {
-  const [questions, setQuestions] = useState<IQuestion[]>([]);
+  const [questions, setQuestions] = useState<IQuestion[]>([
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+    { question: "asdf", answer: "asdf" },
+  ]);
   const [question, setQuestion] = useState<string>("");
+  const messagesEndRef = useRef(null);
 
   return (
-    <div className="flex flex-col space-between">
-      <div>
+    <div className="flex flex-col h-screen">
+      <div className="flex-grow overflow-auto px-4 py-2 min-h-0 h-0">
         {questions?.map((q, i) => (
-          <div key={i}>
-            <p>{q.question}</p>
-            <p>{q.answer}</p>
+          <div
+            key={i}
+            className="flex flex-row justify-between border-b-1 py-4"
+          >
+            <p className="text-xl">{q.question}</p>
+            <div className="">
+              <p className="text-2xl">{q.answer}</p>
+            </div>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
-      <div className="flex flex-row px-4 gap-2">
+
+      <div className="flex flex-row px-4 gap-2 py-4">
         <Input value={question} onChange={(e) => setQuestion(e.target.value)} />
         <Button
           onPress={() => {
             onAsk(question).then((res) => {
               if (!res) return;
+              setQuestion("");
               setQuestions([...questions, { question: question, answer: res }]);
             });
           }}
