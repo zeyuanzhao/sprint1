@@ -3,12 +3,31 @@
 import { Button, Input } from "@heroui/react";
 import { IQuestion } from "@/interfaces";
 import { useEffect, useRef, useState } from "react";
-import { onAsk } from "@/app/actions";
+import { askQuestion, getWord } from "@/app/actions";
 
 export default function Game() {
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const [question, setQuestion] = useState<string>("");
+  const [word, setWord] = useState<string>("");
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const word = await getWord();
+      console.log("The word is: ", word);
+      setWord(word);
+    };
+
+    fetchData();
+  }, []);
+
+  const onAskQuestion = async () => {
+    if (!question.trim()) return;
+    const response = await askQuestion(questions, question, word);
+    setQuestions([...questions, { question, answer: response }]);
+
+    setQuestion("");
+  };
 
   return (
     <div className="flex flex-col h-screen">
@@ -29,15 +48,7 @@ export default function Game() {
 
       <div className="flex flex-row px-4 gap-2 py-4">
         <Input value={question} onChange={(e) => setQuestion(e.target.value)} />
-        <Button
-          onPress={() => {
-            onAsk(question).then((res) => {
-              if (!res) return;
-              setQuestion("");
-              setQuestions([...questions, { question: question, answer: res }]);
-            });
-          }}
-        >
+        <Button onPress={onAskQuestion}>
           <p className="text-lg">Ask</p>
         </Button>
       </div>
