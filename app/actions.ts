@@ -8,7 +8,7 @@ const apiKey = process.env.GEMINI_API_KEY;
 if (!apiKey) {
   throw new Error("Please set the GEMINI_API_KEY environment variable.");
 }
-const sysprompt = fs.readFileSync("prompt.txt", "utf8");
+const sysprompt = fs.readFileSync(process.cwd() + "/prompt.txt", "utf8");
 
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
