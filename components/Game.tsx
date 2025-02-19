@@ -2,13 +2,14 @@
 
 import { Button, Input } from "@heroui/react";
 import { IQuestion } from "@/interfaces";
-import { useEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { askQuestion, getWord } from "@/app/actions";
 
 export default function Game() {
   const [questions, setQuestions] = useState<IQuestion[]>([]);
   const [question, setQuestion] = useState<string>("");
   const [word, setWord] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
@@ -21,12 +22,15 @@ export default function Game() {
     fetchData();
   }, []);
 
-  const onAskQuestion = async () => {
+  const onAskQuestion = async (e: FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
     if (!question.trim()) return;
     const response = await askQuestion(questions, question, word);
     setQuestions([...questions, { question, answer: response }]);
 
     setQuestion("");
+    setLoading(false);
   };
 
   return (
@@ -46,12 +50,16 @@ export default function Game() {
         <div ref={messagesEndRef} />
       </div>
 
-      <div className="flex flex-row px-4 gap-2 py-4">
+      <form className="flex flex-row px-4 gap-2 py-4" onSubmit={onAskQuestion}>
         <Input value={question} onChange={(e) => setQuestion(e.target.value)} />
-        <Button onPress={onAskQuestion}>
+        <Button
+          type="submit"
+          disabled={loading}
+          color={loading ? "default" : "primary"}
+        >
           <p className="text-lg">Ask</p>
         </Button>
-      </div>
+      </form>
     </div>
   );
 }
