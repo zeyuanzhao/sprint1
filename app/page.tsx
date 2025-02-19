@@ -1,5 +1,4 @@
 import Game from "@/components/Game";
-import { getWord } from "./actions";
 
 export default function Home() {
   return (

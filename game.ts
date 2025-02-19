@@ -1,8 +1,4 @@
-import {
-  GoogleGenerativeAI,
-  HarmCategory,
-  HarmBlockThreshold,
-} from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import * as fs from "fs";
 import dotenv from "dotenv";
 import promptSync from "prompt-sync";
