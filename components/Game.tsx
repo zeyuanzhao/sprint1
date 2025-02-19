@@ -6,20 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import { onAsk } from "@/app/actions";
 
 export default function Game() {
-  const [questions, setQuestions] = useState<IQuestion[]>([
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-    { question: "asdf", answer: "asdf" },
-  ]);
+  const [questions, setQuestions] = useState<IQuestion[]>([]);
   const [question, setQuestion] = useState<string>("");
   const messagesEndRef = useRef(null);
 

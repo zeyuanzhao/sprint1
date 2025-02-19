@@ -10,7 +10,7 @@ const chatSession = model.startChat({
 
 export const getWord = async () => {
   const result = await chatSession.sendMessage("What is the word?");
-  console.log(result?.response.text().trim());
+  return result?.response.text().trim();
 };
 
 export const onAsk = async (question: string | undefined) => {

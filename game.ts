@@ -54,5 +54,3 @@ async function main() {
   }
   console.log("The word was: " + result.response.text().trim());
 }
-
-main();

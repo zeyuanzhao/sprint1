@@ -2,7 +2,7 @@ import Game from "@/components/Game";
 import { getWord } from "./actions";
 
 export default function Home() {
-  getWord();
+  getWord().then((res) => console.log("The word is: " + res));
 
   return (
     <div className="h-screen flex flex-col">
